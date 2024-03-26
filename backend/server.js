@@ -1,12 +1,15 @@
 require('dotenv').config(); //require and directly invoke the config method
 const express = require('express')
 const mongose = require('mongoose')
+const UserAuthRoutes = require('../backend/routes/UserAuthRoutes')
 
 //express app
 const app = express()
 
 //middleware
 app.use(express.json())
+
+app.use('api/Authenticate',UserAuthRoutes)
 
 app.use((req, res, next)=> {
     console.log(req.path, req.method)
