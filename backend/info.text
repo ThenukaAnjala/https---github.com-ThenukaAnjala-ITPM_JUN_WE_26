@@ -1,0 +1,3 @@
+dote env
+PORT = 3000
+MONGO_URI =mongodb+srv://thenukavishmina99:w8Fdzj94IfPJgrJ8@cluster0.9alym4t.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
