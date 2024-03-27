@@ -39,7 +39,7 @@ const loginUser = async(req,res) => {
         }
 
          // If the email and password are correct, generate a JWT
-         const token = jwt.sign({ Email: user.Email, userId:user._id }, 'GuardianoftheHill#0319',{ expiresIn: '30d' });
+         const token = jwt.sign({ Email: user.Email, userId:user._id }, 'GuardianoftheHill#0319',{ expiresIn: '29d' });
 
          // Respond with the JWT
          res.status(200).json({ token })
