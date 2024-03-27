@@ -11,6 +11,7 @@ const userSchema= new mongoose.Schema({
     SecondaryContact:{type: Number},
     Gender:{type:String,enum:['Male','Female']},
     Language:{type:String,default:'English'}
+ 
 
 },{timestamps:true})
 
