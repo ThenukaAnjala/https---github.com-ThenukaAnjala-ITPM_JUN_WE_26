@@ -1,36 +1,9 @@
-const express = require('express')
-const router = express.Router()
-const authenticatecontroller =  require('../controllers/AuthenticateController');
+const express = require('express');
+const router = express.Router();
+const { createUser } = require('../controllers/AuthenticateController');
 
+// Define route for handling POST requests to '/'
+router.post('/', createUser);
 
-router.post('/register', async (req, res) => {
-
-   await authenticatecontroller.UserRegistration(req,res)  
-
-})
-
-router.post('/login', async (req, res) => {
-
-    await authenticatecontroller.UserLogin(req,res)  
- 
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-module.exports  = router;
+// Export the router
+module.exports = router

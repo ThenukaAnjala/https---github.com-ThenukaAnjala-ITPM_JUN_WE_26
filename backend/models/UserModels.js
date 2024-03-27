@@ -12,7 +12,7 @@ const userSchema= new mongoose.Schema({
     Gender:{type:String,enum:['Male','Female']},
     Language:{type:String,default:'English'}
 
-});
+},{timestamps:true})
 
 const UserModels = mongoose.model('UserModels',userSchema, 'UserCollection');
 module.exports = UserModels;
