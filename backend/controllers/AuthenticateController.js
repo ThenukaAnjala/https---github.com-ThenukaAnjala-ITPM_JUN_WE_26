@@ -1,5 +1,6 @@
 const UserModels=require('../models/UserModels') //imported usermodel
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 
 
@@ -20,7 +21,39 @@ const createUser = async(req,res) => {
 
 
 const loginUser = async(req,res) => {
-    const {Email,Password}=require.body
+    const {Email,Password} =req.body
+
+    try{
+         // Check if the user with the provided email exists
+        const user = await UserModels.findOne({Email})
+        
+        if (!user) {
+            return res.status(404).json({error:"User not found"})
+        }
+
+        // Compare the provided password with the hashed password stored in the database
+        const passwordMatch = await bcrypt.compare(Password, user.Password);
+
+        if (!passwordMatch) {
+            return res.status(401).json({ error: "Invalid password" });
+        }
+
+         // If the email and password are correct, generate a JWT
+         const token = jwt.sign({ Email: user.Email }, 'your_secret_key', { expiresIn: '1h' });
+
+         // Respond with the JWT
+         res.status(200).json({ token })
+    }   
+    catch (error) {
+        // Handle errors
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
 }
 
-module.exports = {createUser}
+
+    
+
+
+
+module.exports = {createUser,loginUser}
