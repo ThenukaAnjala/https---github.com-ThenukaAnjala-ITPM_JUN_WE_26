@@ -39,7 +39,7 @@ const loginUser = async(req,res) => {
         }
 
          // If the email and password are correct, generate a JWT
-         const token = jwt.sign({ Email: user.Email }, 'your_secret_key', { expiresIn: '1h' });
+         const token = jwt.sign({ Email: user.Email }, 'your_secret_key');
 
          // Respond with the JWT
          res.status(200).json({ token })
@@ -49,6 +49,11 @@ const loginUser = async(req,res) => {
         console.error(error);
         res.status(500).json({ error: "Internal server error" });
     }
+}
+
+const updateUser = async(req,res) => {
+    const{Firstname,Lastname,Email,Password,ContactNo,BloodType,SecondaryContact,Gender,Language}=req.body
+
 }
 
 

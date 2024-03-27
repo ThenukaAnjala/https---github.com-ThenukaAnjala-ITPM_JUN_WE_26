@@ -2,7 +2,7 @@ require('dotenv').config(); //require and directly invoke the config method
 const express = require('express')
 const mongose = require('mongoose')
 const UserAuthRoutes = require('./routes/UserAuthRoutes')
-const userServiceRoutes = require('./routes/userServiceRoutes')
+
 //express app
 const app = express()
 
