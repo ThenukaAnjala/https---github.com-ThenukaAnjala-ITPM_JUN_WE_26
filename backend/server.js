@@ -14,8 +14,7 @@ app.use((req, res, next)=> {
     next()
 })
 //routes
-app.use('/api/UserAuth',UserAuthRoutes) // /api/userAuth/login
-//app.use('/api/guardian' ,exampleRoute)
+app.use('/api/UserAuth',UserAuthRoutes)
 
 //connect to db
 mongose.connect(process.env.MONGO_URI)
