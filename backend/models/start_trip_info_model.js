@@ -9,9 +9,15 @@ const StartTripDetails = new mongoose.Schema(
         },
 
         StartDateandTime: {
-            type: Date,
+            type: String,
             required: true
         
+        },
+
+        ExpectedDurationOfTravel: {
+            type: String,
+            required: true
+
         },
 
         ModeOfTransportation: {
@@ -22,8 +28,8 @@ const StartTripDetails = new mongoose.Schema(
 
         NumberOfTravelers: {
             type: Number,
-            required: [true, "Please enter the number of travelers"],
-            default: 1
+            required: [true, "Please enter the number of travelers"]
+            
 
         },
     

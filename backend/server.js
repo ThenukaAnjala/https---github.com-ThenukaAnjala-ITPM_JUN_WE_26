@@ -20,6 +20,8 @@ app.use((req, res, next)=> {
 //routes
 //app.use('/api/guardian',exampleRoute)
 
+app.use('/api/StartTrips',StartTripRoutes)
+
 //connect to db
 mongose.connect(process.env.MONGO_URI)
   .then(()=>{

@@ -1,9 +1,10 @@
-import Login from "./components/Login";
+
+import TripInfo from "./components/user_trip_info/trip_info";
 function App() {
   return (
     <dev className ="flex w-full h-screen">
       <div className="w-full flex items-center justify-center lg:w-1/2">
-        <Login/>
+       <TripInfo></TripInfo>
       </div>
 
       <div className="bg-gray-200">
