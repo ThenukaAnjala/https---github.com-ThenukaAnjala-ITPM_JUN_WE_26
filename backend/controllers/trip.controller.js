@@ -22,7 +22,7 @@ const getTrip = async (req, res) => {
 }
 
 const createTrip = async (req , res) => {
-    const {Destination,StartDateandTime,ModeOfTransportation,NumberOfTravelers, ExpectedDurationOfTravel} = req.body;
+    const {Destination,StartDateandTime,ModeOfTransportation, ExpectedDurationOfTravel , NumberOfTravelers} = req.body;
     try {
         const StartTrips = await StartTrip.create({
             Destination : Destination,
