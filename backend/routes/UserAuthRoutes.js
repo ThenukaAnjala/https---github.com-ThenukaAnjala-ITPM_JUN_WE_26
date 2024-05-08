@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { createUser, loginUser,updateUser, deleteUser,getUser } = require('../controllers/AuthenticateController');
+const { createUser, loginUser,updateUser, deleteUser,getUser,getAllUsers } = require('../controllers/AuthenticateController');
 
 
 router.post('/register', createUser);
@@ -13,7 +13,7 @@ router.delete('/:deleteID',deleteUser);
 
 router.get('/:id',getUser);
 
-//router.get('/:getAll',getAllUsers);
+router.get('/getAll',getAllUsers);
 
 
 // Export the router

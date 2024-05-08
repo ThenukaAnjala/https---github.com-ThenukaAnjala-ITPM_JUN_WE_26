@@ -3,8 +3,6 @@ const express = require("express");
 const StartTrip = require("./models/start_trip_info_model.js");
 const mongose = require("mongoose");
 const StartTripRoutes = require("./routes/StartTrip_routes.js")
-
-
 const UserAuthRoutes = require('./routes/UserAuthRoutes')
 
 //express app
@@ -19,6 +17,7 @@ app.use((req, res, next)=> {
 })
 //routes
 //app.use('/api/guardian',exampleRoute)
+app.use('/api/UserAuth',UserAuthRoutes)
 
 //connect to db
 mongose.connect(process.env.MONGO_URI)
