@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 //generate Access token
 const generateAccessToken = (user) => {
-    const token = jwt.sign({_id: user._id,name:user.Firstname,email:user.Email,},process.env.ACCESS_TOKEN,{expiresIn:'20s'})
+    const token = jwt.sign({_id: user._id,name:user.Firstname,email:user.Email,},process.env.ACCESS_TOKEN,{expiresIn:'60s'})
     return token
 }
 

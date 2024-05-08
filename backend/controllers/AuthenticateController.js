@@ -117,6 +117,51 @@ const deleteUser = async(req,res) => {
     }
 }
 
+const getUser = asyncHandler(async (req, res) => {
+    const _id = req.params.getuserID;
+  
+    try {
+      // Find the user by userID
+      const user = await UserModels.findById(_id);
+  
+      if (!user) {
+        // If user not found, return error response
+        return res.status(404).json({ error: "User not found" });
+      }
+  
+      // If user found, return user details
+      res.status(200).json(user);
+    } catch (error) {
+      // Handle errors
+      console.error(error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
+
+  const getAllUsers = asyncHandler(async (req, res) => {
+    try {
+      // Find all users
+      const users = await UserModels.find();
+  
+      // If no users found, return empty array
+      if (!users || users.length === 0) {
+        return res.status(404).json({ error: "No users found" });
+      }
+  
+      // If users found, return user details
+      res.status(200).json(users);
+    } catch (error) {
+      // Handle errors
+      console.error(error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
+
+
+
+
+
+
 
 
 
@@ -127,4 +172,4 @@ const deleteUser = async(req,res) => {
 
 
 
-module.exports = {createUser,loginUser,updateUser,deleteUser}
+module.exports = {createUser,loginUser,updateUser,deleteUser,getUser,getAllUsers}
