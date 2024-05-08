@@ -1,17 +1,31 @@
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
+import LoginPage from './pages/LoginPage';
+import MapPage from './pages/MapPage'
 
-import TripInfo from "./components/user_trip_info/trip_info";
+
 function App() {
   return (
-    <dev className ="flex w-full h-screen">
-      <div className="w-full flex items-center justify-center lg:w-1/2">
-       <TripInfo></TripInfo>
-      </div>
+    <Router>
+      <Routes>
+        <Route
+          path='/'
+          element ={/*user*/<LoginPage/>}
+          />
 
-      <div className="bg-gray-200">
-
-      </div>
-    </dev>
+        <Route
+          path='/mappage'
+          element ={/*user*/<MapPage/>}
+          />
+        
+      </Routes>
+    </Router>
   );
 }
+
 
 export default App;

@@ -1,6 +1,8 @@
 const UserModels=require('../models/UserModels') 
+const asyncHandler = require('express-async-handler')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { generateAccessToken } = require('./TokenController');
 
 
 
@@ -20,36 +22,32 @@ const createUser = async(req,res) => {
 
 
 
-const loginUser = async(req,res) => {
+const loginUser = asyncHandler(async(req,res) => {
     const {Email,Password} =req.body
 
-    try{
-         // Check if the user with the provided email exists
-        const user = await UserModels.findOne({Email})
-        
-        if (!user) {
-            return res.status(404).json({error:"User not found"})
+    const response = await UserModels.findOne({Email:Email})
+
+    if(response){
+        const match = await bcrypt.compare(Password,response.Password)
+
+        if(match){
+            const token = generateAccessToken(response)
+            res.status(200).json({
+                id:response._id,
+                Firstname:response.Firstname,
+                accessToken:token
+
+            })
         }
-
-        // Compare the provided password with the hashed password stored in the database
-        const passwordMatch = await bcrypt.compare(Password, user.Password);
-
-        if (!passwordMatch) {
-            return res.status(401).json({ error: "Invalid password" });
+        else{
+            res.status(403).json('password or email mismatch')
         }
-
-         // If the email and password are correct, generate a JWT
-         const token = jwt.sign({ Email: user.Email, userId:user._id }, 'GuardianoftheHill#0319',{ expiresIn: '29d' });
-
-         // Respond with the JWT
-         res.status(200).json({ token })
-    }   
-    catch (error) {
-        // Handle errors
-        console.error(error);
-        res.status(500).json({ error: "Internal server error" });
     }
-}
+    else{
+        res.status(404).json({error:'user not found !'})
+    }
+    
+})
 
 const updateUser = async(req,res) => {
     
@@ -119,6 +117,45 @@ const deleteUser = async(req,res) => {
     }
 }
 
+const getUser = asyncHandler(async (req, res) => {
+    const _id = req.params.getuserID;
+  
+    try {
+      // Find the user by userID
+      const user = await UserModels.findById(_id);
+  
+      if (!user) {
+        // If user not found, return error response
+        return res.status(404).json({ error: "User not found" });
+      }
+  
+      // If user found, return user details
+      res.status(200).json(user);
+    } catch (error) {
+      // Handle errors
+      console.error(error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
+
+  const getAllUsers = asyncHandler(async (req, res) => {
+
+      const users = await UserModels.find({});
+  
+      // If no users found, return empty array
+      if (users) {
+        res.status(200).json(users);
+      } else{
+        res.status(404).json("no user found");
+
+    }
+  });
+
+
+
+
+
+
 
 
 
@@ -129,4 +166,4 @@ const deleteUser = async(req,res) => {
 
 
 
-module.exports = {createUser,loginUser,updateUser,deleteUser}
+module.exports = {createUser,loginUser,updateUser,deleteUser,getUser,getAllUsers}
