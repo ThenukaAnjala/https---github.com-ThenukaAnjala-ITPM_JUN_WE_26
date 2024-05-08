@@ -1,8 +1,29 @@
-import Login from "./components/Login";
-import SignUpPage from "./components/Signup";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
+import LoginPage from './pages/LoginPage';
+import MapPage from './pages/MapPage'
+
+
 function App() {
   return (
-    <SignUpPage />
+    <Router>
+      <Routes>
+        <Route
+          path='/'
+          element ={/*user*/<LoginPage/>}
+          />
+
+        <Route
+          path='/mappage'
+          element ={/*user*/<MapPage/>}
+          />
+        
+      </Routes>
+    </Router>
   );
 }
 
