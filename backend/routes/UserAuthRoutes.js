@@ -13,7 +13,7 @@ router.delete('/:deleteID',deleteUser);
 
 router.get('/:id',getUser);
 
-router.get('/:getAll',getAllUsers);
+//router.get('/:getAll',getAllUsers);
 
 
 // Export the router

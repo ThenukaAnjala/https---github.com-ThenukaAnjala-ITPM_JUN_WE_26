@@ -172,4 +172,4 @@ const getUser = asyncHandler(async (req, res) => {
 
 
 
-module.exports = {createUser,loginUser,updateUser,deleteUser,getUser,getAllUsers}
+module.exports = {createUser,loginUser,updateUser,deleteUser,getUser}
